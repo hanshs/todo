@@ -2,7 +2,7 @@ import React from 'react'
 import Context from '../Store'
 
 export default function CreateTodo() {
-  const {createTodo} = React.useContext(Context)
+  const { createTodo } = React.useContext(Context)
   const [isCreate, setIsCreate] = React.useState(false)
   const [title, setTitle] = React.useState('')
 
@@ -28,13 +28,13 @@ export default function CreateTodo() {
   if (isCreate) {
     return (
       <form onSubmit={onCreate}>
-      <input
-        autoFocus
-        onChange={handleInputChange}
-        value={title}
-        onBlur={handleBlur}
-        className="bg-white-200 rounded-xl py-2 px-4 w-full"
-      />
+        <input
+          autoFocus
+          onChange={handleInputChange}
+          value={title}
+          onBlur={handleBlur}
+          className="bg-white-200 rounded-xl py-2 px-4 w-full"
+        />
       </form>
     )
   }

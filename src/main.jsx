@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import {ContextProvider} from './Store'
+import { ContextProvider } from './Store'
 import TodoList from './components/TodoList'
 import CreateTodo from './components/CreateTodo'
 

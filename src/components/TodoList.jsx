@@ -2,7 +2,7 @@ import React from 'react'
 import Context from '../Store'
 
 function TodoListItem({ title, completed, id }, i) {
-  const {completeTodo, uncompleteTodo, deleteTodo} = React.useContext(Context)
+  const { completeTodo, uncompleteTodo, deleteTodo } = React.useContext(Context)
   const [isHover, setIsHover] = React.useState(false)
   const [isHoverDelete, setIsHoverDelete] = React.useState(false)
 
@@ -17,7 +17,6 @@ function TodoListItem({ title, completed, id }, i) {
   const onClickDelete = () => {
     deleteTodo(id)
   }
-
 
   return (
     <li
@@ -53,9 +52,9 @@ function TodoListItem({ title, completed, id }, i) {
 }
 
 export default function TodoList() {
-  const context = React.useContext(Context)
-  const completedTodos = context.todos.filter((todo) => todo.completed)
-  const uncompletedTodos = context.todos.filter((todo) => !todo.completed)
+  const { todos } = React.useContext(Context)
+  const completedTodos = todos.filter((todo) => todo.completed)
+  const uncompletedTodos = todos.filter((todo) => !todo.completed)
 
   return (
     <>
