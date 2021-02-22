@@ -1,5 +1,5 @@
 import React from 'react'
-import Context from '../Store'
+import Context from './Store'
 
 export default function CreateTodo() {
   const { createTodo } = React.useContext(Context)

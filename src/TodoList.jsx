@@ -1,5 +1,5 @@
 import React from 'react'
-import Context from '../Store'
+import Context from './Store'
 
 function TodoListItem({ title, completed, id }, i) {
   const { completeTodo, uncompleteTodo, deleteTodo } = React.useContext(Context)
@@ -27,21 +27,20 @@ function TodoListItem({ title, completed, id }, i) {
     >
       <button
         onClick={onClickTodo}
-        className={`focus:outline-none hover:text-green-800 cursor-pointer ${
+        className={`focus:outline-none focus:text-green-500 hover:text-green-800 cursor-pointer text-left ${
           completed ? 'line-through' : ''
         }`}
+        title={`Mark as ${completed ? 'todo' : 'completed'}`}
       >
         {title}
       </button>
-      {isHover && (
+      {isHover && completed && (
         <span>
-          {!isHoverDelete && (
-            <button onClick={onClickTodo}>{completed ? '🔼' : '✔'}</button>
-          )}
           <button
             onMouseEnter={() => setIsHoverDelete(true)}
             onMouseLeave={() => setIsHoverDelete(false)}
             onClick={onClickDelete}
+            title="Delete"
           >
             {isHoverDelete ? '❌' : '✖'}
           </button>
@@ -56,14 +55,21 @@ export default function TodoList() {
   const completedTodos = todos.filter((todo) => todo.completed)
   const uncompletedTodos = todos.filter((todo) => !todo.completed)
 
+  if (!todos.length) {
+    return null
+  }
+
   return (
     <>
-      <ul className="bg-gradient-to-r from-yellow-50 to-yellow-200 py-2 px-4 shadow-xl rounded-xl">
+      <ul className="bg-gradient-to-r from-yellow-50 to-yellow-200 pb-2 px-4 shadow-xl rounded-xl">
+        <span className="text-xs text-gray-600">TODO</span>
         {uncompletedTodos.map((todo, i) => (
           <TodoListItem {...todo} key={i} />
         ))}
       </ul>
-      <ul className="bg-white py-2 px-4 shadow-xl rounded-xl">
+
+      <ul className="bg-white pb-2 px-4 shadow-xl rounded-xl">
+        <span className="text-xs text-gray-600">DONE</span>
         {completedTodos.map((todo, i) => (
           <TodoListItem {...todo} key={i} />
         ))}
