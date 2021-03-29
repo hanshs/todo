@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { ContextProvider } from './Store'
 import TodoList from './TodoList'
 import CreateTodo from './CreateTodo'
 
@@ -9,14 +8,12 @@ import './static/index.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ContextProvider>
-      <div className="h-screen bg-indigo-900 flex flex-col items-center justify-center">
-        <div className="w-80 space-y-2 text-2xl">
-          <CreateTodo />
-          <TodoList />
-        </div>
+    <div className="h-screen bg-indigo-900 flex flex-col items-center justify-center">
+      <div className="w-80 space-y-2 text-2xl">
+        <CreateTodo />
+        <TodoList />
       </div>
-    </ContextProvider>
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 )

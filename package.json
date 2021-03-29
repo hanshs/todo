@@ -8,9 +8,12 @@
   },
   "dependencies": {
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-confetti": "^6.0.1",
+    "react-dom": "^17.0.0",
+    "zustand": "^3.3.3"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.13.10",
     "@vitejs/plugin-react-refresh": "^1.1.0",
     "autoprefixer": "^10.2.4",
     "postcss": "^8.2.6",
