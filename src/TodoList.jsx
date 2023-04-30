@@ -2,13 +2,10 @@ import React from 'react'
 import Confetti from 'react-confetti'
 import useStore from './store'
 
-function TodoListItem({ title, completed, completionDate, id, onComplete }, i) {
+function TodoListItem({ title, completed, completionDate, id, onComplete }) {
   const uncompleteTodo = useStore(state => state.uncompleteTodo)
   const completeTodo = useStore(state => state.completeTodo)
   const deleteTodo = useStore(state => state.deleteTodo)
-  const [isHover, setIsHover] = React.useState(false)
-  const [isHoverDelete, setIsHoverDelete] = React.useState(false)
-
 
   const onClickTodo = () => {
     if (completed) {
@@ -20,31 +17,23 @@ function TodoListItem({ title, completed, completionDate, id, onComplete }, i) {
   }
 
   return (
-    <li
-      key={i}
-      className={`flex justify-between ${!completed && 'hover:underline'}`}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    >
+    <li data-test={`${completed ? 'done-item' : 'todo-item'}`} className={`flex justify-between group ${!completed && 'hover:underline'}`}>
       <button
         onClick={onClickTodo}
-        className={`focus:outline-none ${!completed && 'hover:text-green-800'} focus:text-green-500 cursor-pointer text-left`}
+        className={`focus:outline-none w-full text-left`}
         title={`Mark as ${completed ? 'todo' : 'done'}`}
       >
-        <span className={`${completed ? 'line-through' : ''}`}>{title}</span>
+        <span className={`focus:text-green-500 cursor-pointer text-left ${completed ? 'line-through' : 'hover:text-green-800'}`}>{title}</span>
         {completed && <span className="text-gray-400 text-decoration-none text-sm ml-2">{completionDate}</span>}
       </button>
-      {isHover && completed && (
-        <span>
+      {completed && (
           <button
-            onMouseEnter={() => setIsHoverDelete(true)}
-            onMouseLeave={() => setIsHoverDelete(false)}
+            data-test="clear-todo"
             onClick={() => deleteTodo(id)}
             title="Delete"
           >
-            {isHoverDelete ? '❌' : '✖'}
+            ❌
           </button>
-        </span>
       )}
     </li>
   )
@@ -71,15 +60,15 @@ export default function TodoList() {
   return (
     <>
       {<Confetti numberOfPieces={celebrate ? 200 : 0} />}
-      <ul className="bg-gradient-to-r from-yellow-50 to-yellow-200 pb-2 px-4 shadow-xl rounded-xl">
+      <ul data-test="todo-list" className="bg-gradient-to-r from-yellow-50 to-yellow-200 pb-2 px-4 shadow-xl rounded-xl">
         <span className="text-xs text-gray-600">TODO</span>
         {uncompletedTodos.map((todo, i) => <TodoListItem {...todo} key={i} onComplete={onComplete} />)}
       </ul>
 
-      <ul className="bg-white pb-2 px-4 shadow-xl rounded-xl">
+      {completedTodos.length > 0 && <ul data-test="done-list" className="bg-white pb-2 px-4 shadow-xl rounded-xl">
         <span className="text-xs text-gray-600">DONE</span>
         {completedTodos.map((todo, i) => <TodoListItem {...todo} key={i} />)}
-      </ul>
+      </ul>}
     </>
   )
 }
