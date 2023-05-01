@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import TodoList from './TodoList'
 import CreateTodo from './CreateTodo'
-
+import { Analytics } from '@vercel/analytics/react';
 import './static/index.css'
 
 ReactDOM.render(
@@ -14,6 +14,7 @@ ReactDOM.render(
         <TodoList />
       </div>
     </div>
+    <Analytics />
   </React.StrictMode>,
   document.getElementById('root')
 )
